@@ -15,9 +15,9 @@ typedef enum {
 } ParametersCode;
 
 typedef struct {
-    const char *measure_file_name;
-    const char *pipe_file_name;
-    const char *route_file_name;
+    const char *measures_file_name;
+    const char *pipes_file_name;
+    const char *routes_file_name;
 } Parameters;
 
 void parametersCreate(Parameters *parameters_parser,
@@ -25,5 +25,13 @@ void parametersCreate(Parameters *parameters_parser,
 					  const char *parameters[]);
 
 void parametersDestroy(Parameters *parameters_parser);
+
+ParametersCode parametersCode(Parameters *parameters_parser);
+
+const char *parameterMeasuresFileName(Parameters *parameters_parser);
+
+const char *parameterPipesFileName(Parameters *parameters_parser);
+
+const char *parameterRoutesFileName(Parameters *parameters_parser);
 
 #endif /* PARAMETERS_H_ */
