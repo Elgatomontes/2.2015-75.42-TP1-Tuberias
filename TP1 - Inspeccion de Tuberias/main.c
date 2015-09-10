@@ -6,4 +6,11 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#define EXECUTION_NORMAL 0
+#define EXECUTION_ERROR 1
+
+int main(int argc, char **argv) {
+	return EXECUTION_NORMAL;
+}
+
 
