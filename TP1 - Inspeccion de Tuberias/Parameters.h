@@ -9,12 +9,15 @@
 #ifndef PARAMETERS_H_
 #define PARAMETERS_H_
 
+#include <stdio.h>
+
 typedef enum {
     ParametersCodeOK,
     ParametersCodeFail
 } ParametersCode;
 
 typedef struct {
+	ParametersCode parameters_code;
     const char *measures_file_name;
     const char *pipes_file_name;
     const char *routes_file_name;
