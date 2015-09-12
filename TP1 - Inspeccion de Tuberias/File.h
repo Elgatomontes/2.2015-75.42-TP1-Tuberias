@@ -27,7 +27,7 @@ typedef struct {
     int end_of_file;
 } File;
 
-void fileCreate(File *file, char *file_name, FileOpenMode open_mode);
+void fileCreate(File *file, const char *file_name, FileOpenMode open_mode);
 
 void fileDestroy(File *file);
 

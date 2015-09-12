@@ -23,7 +23,7 @@ char *openMode(FileOpenMode open_mode) {
     return "";
 }
 
-void fileCreate(File *file, char *file_name, FileOpenMode open_mode) {
+void fileCreate(File *file, const char *file_name, FileOpenMode open_mode) {
     file->file = NULL;
     file->end_of_file = 0;
     file->operation_code = FileOperationCodeFail;
