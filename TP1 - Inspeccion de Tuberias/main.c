@@ -22,9 +22,5 @@ int main(int argc, const char *argv[]) {
 		return EXECUTION_ERROR;
 	}
 
-	printf("Primer parámetro: %s\n", parameters.measures_file_name);
-	printf("Segundo parámetro: %s\n", parameters.pipes_file_name);
-	printf("Tercer parámetro: %s\n", parameters.routes_file_name);
-
 	return EXECUTION_NORMAL;
 }

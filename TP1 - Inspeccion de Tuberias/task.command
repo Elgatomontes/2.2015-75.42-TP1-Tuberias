@@ -17,7 +17,7 @@ echo
 # Valgrind task.
 echo "******** Valgrind Task start ********"
 sh execute_valgrind_and_verify_result_code.sh ./tp mediciones.dat tuberias.txt recorrido.txt
-sh execute_valgrind_and_verify_result_code.sh ./tp mediciones tuberias.txt recorrido.txt
-sh execute_valgrind_and_verify_result_code.sh ./tp mediciones inexistente recorrido.txt
+#sh execute_valgrind_and_verify_result_code.sh ./tp mediciones tuberias.txt recorrido.txt
+#sh execute_valgrind_and_verify_result_code.sh ./tp mediciones inexistente recorrido.txt
 echo "******** Valgrind Task start ********"
 echo
