@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <string.h>
+
 #include "File.h"
 
 #define FILE_OPEN_MODE_READ "rb"
