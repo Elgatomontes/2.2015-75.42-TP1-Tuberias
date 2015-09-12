@@ -8,6 +8,19 @@
 
 #include "File.h"
 
+#define FILE_OPEN_MODE_READ "rb"
+#define FILE_OPEN_MODE_WRITE "w"
+
+char *openMode(FileOpenMode open_mode) {
+    if (open_mode == FileOpenModeRead) {
+        return FILE_OPEN_MODE_READ;
+    } else if (open_mode == FileOpenModeWrite) {
+        return FILE_OPEN_MODE_WRITE;
+    }
+
+    return "";
+}
+
 void fileCreate(File *file, char *file_name, FileOpenMode open_mode) {
     file->file = NULL;
     file->end_of_file = 0;

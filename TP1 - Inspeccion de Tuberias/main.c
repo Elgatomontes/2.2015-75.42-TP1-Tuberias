@@ -19,6 +19,7 @@ int main(int argc, const char *argv[]) {
 	parametersCreate(&parameters, argc, argv);
 	if (parametersCode(&parameters) == ParametersCodeFail) {
 		printf("Error en la creación de los parámetros.\n");
+		parametersDestroy(&parameters);
 		return EXECUTION_ERROR;
 	}
 
