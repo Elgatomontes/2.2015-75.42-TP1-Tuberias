@@ -12,8 +12,7 @@
 #define PIPES_FILE_INDEX 2
 #define ROUTES_FILE_INDEX 3
 
-void setInvalidConfiguration(Parameters *parameters)
-{
+void setInvalidConfiguration(Parameters *parameters) {
     parameters->parameters_code = ParametersCodeFail;
     parameters->measures_file_name = NULL;
     parameters->pipes_file_name = NULL;
