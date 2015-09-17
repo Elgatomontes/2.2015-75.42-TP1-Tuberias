@@ -33,7 +33,7 @@ echo "*************************** CPPLint Task end ****************************"
 
 # Valgrind task.
 echo "************************** Valgrind Task start **************************"
-sh execute_valgrind_and_verify_result_code.sh ./tp mediciones.dat tuberias.txt recorrido.txt
+sh execute_valgrind_and_verify_result_code.sh ./tp 1/mediciones.dat 1/tuberias.txt 1/recorrido.txt
 # Check if Valgrind succeeded.
 if [ $? != 0 ]
 then
