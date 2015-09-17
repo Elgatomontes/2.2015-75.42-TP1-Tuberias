@@ -14,35 +14,63 @@
 #define EXECUTION_NORMAL 0
 #define EXECUTION_ERROR 1
 
+#define PARAMATERS_COUNT_ERROR "La cantidad de parámetros es inválida\n"
+#define FILES_OPEN_ERROR "Archivo inválido\n"
+
+FileOpenCode createFiles(Parameters *parameters,
+						File *measuresFile,
+						File *pipesFile,
+						File *routesFile) {
+	fileCreate(measuresFile,
+				parameterMeasuresFileName(parameters),
+				FileOpenModeRead);
+
+	fileCreate(pipesFile,
+				parameterPipesFileName(parameters),
+				FileOpenModeRead);
+
+	fileCreate(routesFile,
+				parameterRoutesFileName(parameters),
+				FileOpenModeRead);
+
+	if (fileOpenCode(measuresFile) == FileOpenCodeFail ||
+		fileOpenCode(pipesFile) == FileOpenCodeFail ||
+		fileOpenCode(routesFile) == FileOpenCodeFail) {
+		return FileOpenCodeFail;
+	}
+
+	return FileOpenCodeSuccess;
+}
+
 int main(int argc, const char *argv[]) {
 	Parameters parameters;
 	File measuresFile;
 	File pipesFile;
-	File routesFiles;
+	File routesFile;
 
 	parametersCreate(&parameters, argc, argv);
 	if (parametersCode(&parameters) == ParametersCodeFail) {
-		printf("Error en la creación de los parámetros.\n");
+		printf("%s", PARAMATERS_COUNT_ERROR);
 		parametersDestroy(&parameters);
 		return EXECUTION_ERROR;
 	}
 
-	// @TODO: Gastón - Pasar esto a un único método y que sea el método el que dice si fue Ok o fail.
-	fileCreate(&measuresFile,
-			parameterMeasuresFileName(&parameters),
-			FileOpenModeRead);
-
-	fileCreate(&pipesFile,
-			parameterPipesFileName(&parameters),
-			FileOpenModeRead);
-
-	fileCreate(&routesFiles,
-			parameterRoutesFileName(&parameters),
-			FileOpenModeRead);
+	FileOpenCode openCode = createFiles(&parameters,
+										&measuresFile,
+										&pipesFile,
+										&routesFile);
+	if (openCode == FileOpenCodeFail) {
+		parametersDestroy(&parameters);
+		fileDestroy(&measuresFile);
+		fileDestroy(&pipesFile);
+		fileDestroy(&routesFile);
+		printf("%s", FILES_OPEN_ERROR);
+		return EXECUTION_ERROR;
+	}
 
 	fileDestroy(&measuresFile);
 	fileDestroy(&pipesFile);
-	fileDestroy(&routesFiles);
+	fileDestroy(&routesFile);
 	parametersDestroy(&parameters);
 	return EXECUTION_NORMAL;
 }

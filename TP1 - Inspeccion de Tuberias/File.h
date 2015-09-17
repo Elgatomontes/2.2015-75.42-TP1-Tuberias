@@ -12,9 +12,9 @@
 #include <stdio.h>
 
 typedef enum {
-    FileOperationCodeSuccess,
-    FileOperationCodeFail,
-} FileOperationCode;
+	FileOpenCodeSuccess,
+    FileOpenCodeFail,
+} FileOpenCode;
 
 typedef enum {
     FileOpenModeRead,
@@ -23,12 +23,14 @@ typedef enum {
 
 typedef struct {
     FILE *file;
-    FileOperationCode operation_code;
+    FileOpenCode open_code;
     int end_of_file;
 } File;
 
 void fileCreate(File *file, const char *file_name, FileOpenMode open_mode);
 
 void fileDestroy(File *file);
+
+FileOpenCode fileOpenCode(File *file);
 
 #endif /* FILE_H_ */

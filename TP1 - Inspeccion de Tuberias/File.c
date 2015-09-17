@@ -26,22 +26,26 @@ char *openMode(FileOpenMode open_mode) {
 void fileCreate(File *file, const char *file_name, FileOpenMode open_mode) {
     file->file = NULL;
     file->end_of_file = 0;
-    file->operation_code = FileOperationCodeFail;
+    file->open_code = FileOpenCodeFail;
 
     if (file_name != NULL && strlen(file_name) > 0) {
         file->file = fopen(file_name, openMode(open_mode));
     }
 
     if (file->file != NULL) {
-        file->operation_code = FileOperationCodeSuccess;
+        file->open_code = FileOpenCodeSuccess;
     }
 }
 
 void fileDestroy(File *file) {
     file->end_of_file = EOF;
-    file->operation_code = FileOperationCodeFail;
+    file->open_code = FileOpenCodeFail;
 
     if (file->file != NULL) {
         fclose(file->file);
     }
+}
+
+FileOpenCode fileOpenCode(File *file) {
+	return file->open_code;
 }
