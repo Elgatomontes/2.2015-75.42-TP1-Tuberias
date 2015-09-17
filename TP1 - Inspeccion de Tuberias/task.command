@@ -89,3 +89,62 @@ echo "El comando 'Valgrind' se ejecutó correctamente en la sexta prueba."
 
 echo "*************************** Valgrind Task end ***************************"
 echo
+
+# Run task.
+echo "************************** Run Task start **************************"
+./tp 1/mediciones.dat 1/tuberias.txt 1/recorrido.txt
+# Check if Run succeeded.
+if [ $? != 0 ]
+then
+	echo "La salida de la prueba uno dió ERROR."
+	return
+fi
+echo "Prueba uno superada sin errores."
+
+./tp 2/mediciones 2/tuberias.txt 2/recorrido.txt
+# Check if Run succeeded.
+if [ $? != 0 ]
+then
+	echo "La salida de la prueba dos dió ERROR."
+	return
+fi
+echo "Prueba dos superada sin errores."
+
+./tp 3/mediciones.dat 3/tuberias.txt 3/recorrido.txt
+# Check if Run succeeded.
+if [ $? != 0 ]
+then
+	echo "La salida de la prueba tres dió ERROR."
+	return
+fi
+echo "Prueba tres superada sin errores."
+
+./tp 4/mediciones.dat 4/tuberias.txt 4/recorrido.txt
+# Check if Run succeeded.
+if [ $? != 0 ]
+then
+	echo "La salida de la prueba cuatro dió ERROR."
+	return
+fi
+echo "Prueba cuatro superada sin errores."
+
+./tp 5/mediciones 5/tuberias.txt 5/recorrido.txt
+# Check if Run succeeded.
+if [ $? != 0 ]
+then
+	echo "La salida de la prueba cinco dió ERROR."
+	return
+fi
+echo "Prueba cinco superada sin errores."
+
+./tp 6/mediciones 6/inexistente 6/recorrido.txt
+# Check if Run succeeded.
+if [ $? != 0 ]
+then
+	echo "La salida de la prueba seis dió ERROR."
+	return
+fi
+echo "Prueba seis superada sin errores."
+
+echo "*************************** Valgrind Task end ***************************"
+echo
