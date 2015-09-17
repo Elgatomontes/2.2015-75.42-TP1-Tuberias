@@ -42,7 +42,7 @@ then
 fi
 echo "El comando 'Valgrind' se ejecutó correctamente en la primer prueba."
 
-sh execute_valgrind_and_verify_result_code.sh ./tp mediciones tuberias.txt recorrido.txt
+sh execute_valgrind_and_verify_result_code.sh ./tp 2/mediciones 2/tuberias.txt 2/recorrido.txt
 # Check if Valgrind succeeded.
 if [ $? != 0 ]
 then
@@ -51,7 +51,7 @@ then
 fi
 echo "El comando 'Valgrind' se ejecutó correctamente en la segunda prueba."
 
-sh execute_valgrind_and_verify_result_code.sh ./tp mediciones inexistente recorrido.txt
+sh execute_valgrind_and_verify_result_code.sh ./tp 3/mediciones.dat 3/tuberias.txt 3/recorrido.txt
 # Check if Valgrind succeeded.
 if [ $? != 0 ]
 then
@@ -59,6 +59,33 @@ then
 	return
 fi
 echo "El comando 'Valgrind' se ejecutó correctamente en la tercera prueba."
+
+sh execute_valgrind_and_verify_result_code.sh ./tp 4/mediciones.dat 4/tuberias.txt 4/recorrido.txt
+# Check if Valgrind succeeded.
+if [ $? != 0 ]
+then
+	echo "Error al correr el comando 'Valgrind' en la cuarta prueba."
+	return
+fi
+echo "El comando 'Valgrind' se ejecutó correctamente en la cuarta prueba."
+
+sh execute_valgrind_and_verify_result_code.sh ./tp 5/mediciones 5/tuberias.txt 5/recorrido.txt
+# Check if Valgrind succeeded.
+if [ $? != 0 ]
+then
+	echo "Error al correr el comando 'Valgrind' en la quinta prueba."
+	return
+fi
+echo "El comando 'Valgrind' se ejecutó correctamente en la quinta prueba."
+
+sh execute_valgrind_and_verify_result_code.sh ./tp 6/mediciones 6/inexistente 6/recorrido.txt
+# Check if Valgrind succeeded.
+if [ $? != 0 ]
+then
+	echo "Error al correr el comando 'Valgrind' en la sexta prueba."
+	return
+fi
+echo "El comando 'Valgrind' se ejecutó correctamente en la sexta prueba."
 
 echo "*************************** Valgrind Task end ***************************"
 echo
