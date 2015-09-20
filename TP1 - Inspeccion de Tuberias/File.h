@@ -23,14 +23,18 @@ typedef enum {
 
 typedef struct {
     FILE *file;
-    FileOpenCode open_code;
-    int end_of_file;
+    FileOpenCode openCode;
+    int endOfFile;
 } File;
 
-void fileCreate(File *file, const char *file_name, FileOpenMode open_mode);
+void fileCreate(File *file, const char *fileName, FileOpenMode openMode);
 
 void fileDestroy(File *file);
 
 FileOpenCode fileOpenCode(File *file);
+
+void fileReadLine(File *file, char *line, int maxLenght);
+
+void fileRead(File *file, char *line, int bytesToRead);
 
 #endif /* FILE_H_ */

@@ -88,10 +88,8 @@ fi
 echo "El comando 'Valgrind' se ejecutó correctamente en la sexta prueba."
 
 echo "*************************** Valgrind Task end ***************************"
-echo
-
 # Run task.
-echo "************************** Run Task start **************************"
+echo "**************************** Run Task start *****************************"
 ./tp 1/mediciones.dat 1/tuberias.txt 1/recorrido.txt
 # Check if Run succeeded.
 if [ $? != 0 ]
@@ -146,5 +144,5 @@ then
 fi
 echo "Prueba seis superada sin errores."
 
-echo "*************************** Valgrind Task end ***************************"
+echo "***************************** Run Task end ******************************"
 echo

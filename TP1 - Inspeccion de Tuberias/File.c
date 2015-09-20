@@ -13,7 +13,7 @@
 #define FILE_OPEN_MODE_READ "rb"
 #define FILE_OPEN_MODE_WRITE "w"
 
-char *openMode(FileOpenMode open_mode) {
+char *getOpenMode(FileOpenMode open_mode) {
     if (open_mode == FileOpenModeRead) {
         return FILE_OPEN_MODE_READ;
     } else if (open_mode == FileOpenModeWrite) {
@@ -23,23 +23,23 @@ char *openMode(FileOpenMode open_mode) {
     return "";
 }
 
-void fileCreate(File *file, const char *file_name, FileOpenMode open_mode) {
+void fileCreate(File *file, const char *fileName, FileOpenMode openMode) {
     file->file = NULL;
-    file->end_of_file = 0;
-    file->open_code = FileOpenCodeFail;
+    file->endOfFile = 0;
+    file->openCode = FileOpenCodeFail;
 
-    if (file_name != NULL && strlen(file_name) > 0) {
-        file->file = fopen(file_name, openMode(open_mode));
+    if (fileName != NULL && strlen(fileName) > 0) {
+        file->file = fopen(fileName, getOpenMode(openMode));
     }
 
     if (file->file != NULL) {
-        file->open_code = FileOpenCodeSuccess;
+        file->openCode = FileOpenCodeSuccess;
     }
 }
 
 void fileDestroy(File *file) {
-    file->end_of_file = EOF;
-    file->open_code = FileOpenCodeFail;
+    file->endOfFile = EOF;
+    file->openCode = FileOpenCodeFail;
 
     if (file->file != NULL) {
         fclose(file->file);
@@ -47,5 +47,17 @@ void fileDestroy(File *file) {
 }
 
 FileOpenCode fileOpenCode(File *file) {
-	return file->open_code;
+	return file->openCode;
+}
+
+void fileReadLine(File *file, char *line, int maxLenght) {
+    if (fgets(line, maxLenght, file->file) == NULL) {
+        file->endOfFile = EOF;
+    }
+}
+
+void fileRead(File *file, char *line, int bytesToRead) {
+	if (fread(line, bytesToRead, 1, file->file) == 0) {
+		file->endOfFile = EOF;
+	}
 }
