@@ -12,7 +12,7 @@
 
 static int const kNodeNameMaxLenght = 3; // name + \n char.
 
-void createList(PipesRoute *route, File *pipesFile, File *routeFiles) {
+void createRouteList(PipesRoute *route, File *routeFiles) {
 	char *nodeNameBuffer = (char *)malloc(sizeof(char) * kNodeNameMaxLenght);
 
 	fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
@@ -31,7 +31,7 @@ void pipesRouteCreate(PipesRoute **route, File *pipesFile, File *routeFiles) {
 	newRoute->headNode = NULL;
 	*route = newRoute;
 
-	createList(*route, pipesFile, routeFiles);
+	createRouteList(*route, routeFiles);
 }
 
 void pipesRouteDestroy(PipesRoute *route) {
