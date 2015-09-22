@@ -16,7 +16,10 @@ static float const kThresholdDistance = 0.5;
 static int const kMinutesInAnHour = 60;
 
 int argumentsCalculateThreshold(Arguments *arguments) {
-	float threshold = kThresholdDistance * kMinutesInAnHour * arguments->sensingSpeed / arguments->flowSpeed;
+	int sensingSpeed = arguments->sensingSpeed;
+	int flowSpeed = arguments->flowSpeed;
+	float distancePerHour = kThresholdDistance * kMinutesInAnHour;
+	float threshold = distancePerHour * sensingSpeed / flowSpeed;
 	return ceilf(threshold);
 }
 

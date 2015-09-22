@@ -23,15 +23,15 @@ FileOpenCode createFiles(Parameters *parameters,
 						File *routesFile) {
 	fileCreate(measuresFile,
 				parameterMeasuresFileName(parameters),
-				FileOpenModeRead);
+				FileOpenModeReadBinary);
 
 	fileCreate(pipesFile,
 				parameterPipesFileName(parameters),
-				FileOpenModeRead);
+				FileOpenModeReadText);
 
 	fileCreate(routesFile,
 				parameterRoutesFileName(parameters),
-				FileOpenModeRead);
+				FileOpenModeReadText);
 
 	if (fileOpenCode(measuresFile) == FileOpenCodeFail ||
 		fileOpenCode(pipesFile) == FileOpenCodeFail ||
