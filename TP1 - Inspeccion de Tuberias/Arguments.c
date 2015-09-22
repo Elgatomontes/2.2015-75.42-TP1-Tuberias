@@ -48,3 +48,19 @@ void argumentsDestroy(Arguments *arguments) {
 	arguments->sensorsNumber = 0;
 	arguments->thresholdSamples = 0;
 }
+
+int argumentsFlowSpeed(Arguments *arguments) {
+	return arguments->flowSpeed;
+}
+
+int argumentsSensingSpeed(Arguments *arguments) {
+	return arguments->sensingSpeed;
+}
+
+int argumentsSensorsNumber(Arguments *arguments) {
+	return arguments->sensorsNumber;
+}
+
+int argumentsThresholdSamples(Arguments *arguments) {
+	return arguments->thresholdSamples;
+}

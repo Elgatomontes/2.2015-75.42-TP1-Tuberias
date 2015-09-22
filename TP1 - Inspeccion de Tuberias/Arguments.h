@@ -24,4 +24,12 @@ void argumentsCreate(Arguments *arguments, File *file);
 
 void argumentsDestroy(Arguments *arguments);
 
+int argumentsFlowSpeed(Arguments *arguments);
+
+int argumentsSensingSpeed(Arguments *arguments);
+
+int argumentsSensorsNumber(Arguments *arguments);
+
+int argumentsThresholdSamples(Arguments *arguments);
+
 #endif /* ARGUMENTS_H_ */
