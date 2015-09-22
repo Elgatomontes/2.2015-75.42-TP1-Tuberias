@@ -20,6 +20,4 @@ void pipesRouteCreate(PipesRoute **route, File *pipesFile, File *routeFiles);
 
 void pipesRouteDestroy(PipesRoute *route);
 
-void pipesRouteAddNode(PipesRoute *route, struct RouteNode *node);
-
 #endif /* PIPESROUTE_H_ */

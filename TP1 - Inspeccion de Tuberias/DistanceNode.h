@@ -21,5 +21,6 @@ struct DistanceNode *distanceNodeCreate(char first, char second, int distance);
 void distanceNodeDestroy(struct DistanceNode *node);
 
 void distanceNodeSetNext(struct DistanceNode *node, struct DistanceNode *next);
+struct DistanceNode *distanceNodeNext(struct DistanceNode *node);
 
 #endif /* DISTANCENODE_H_ */

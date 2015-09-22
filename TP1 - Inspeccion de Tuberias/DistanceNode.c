@@ -27,3 +27,7 @@ void distanceNodeDestroy(struct DistanceNode *node) {
 void distanceNodeSetNext(struct DistanceNode *node, struct DistanceNode *next) {
 	node->next = next;
 }
+
+struct DistanceNode *distanceNodeNext(struct DistanceNode *node) {
+	return node->next;
+}

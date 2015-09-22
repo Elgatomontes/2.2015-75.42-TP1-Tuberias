@@ -10,9 +10,14 @@
 #define PIPESDISTANCES_H_
 
 #include "DistanceNode.h"
+#include "File.h"
 
 typedef struct {
 	struct DistanceNode *headNode;
 } PipesDistances;
+
+void pipesDistancesCreate(PipesDistances **distances, File *pipesFile);
+
+void pipesDistancesDestroy(PipesDistances *route);
 
 #endif /* PIPESDISTANCES_H_ */
