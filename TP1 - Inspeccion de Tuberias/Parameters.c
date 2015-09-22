@@ -8,9 +8,9 @@
 
 #include "Parameters.h"
 
-#define MEASURE_FILE_INDEX 1
-#define PIPES_FILE_INDEX 2
-#define ROUTES_FILE_INDEX 3
+static int const kMeasureFileIndex = 1;
+static int const kPipesFileIndex = 2;
+static int const kRoutesFileIndex = 3;
 
 void setInvalidConfiguration(Parameters *parameters) {
     parameters->parameters_code = ParametersCodeFail;
@@ -20,9 +20,9 @@ void setInvalidConfiguration(Parameters *parameters) {
 }
 
 void parseParameters(Parameters *parameters_parser, const char *parameters[]) {
-	parameters_parser->measures_file_name = parameters[MEASURE_FILE_INDEX];
-	parameters_parser->pipes_file_name = parameters[PIPES_FILE_INDEX];
-	parameters_parser->routes_file_name = parameters[ROUTES_FILE_INDEX];
+	parameters_parser->measures_file_name = parameters[kMeasureFileIndex];
+	parameters_parser->pipes_file_name = parameters[kPipesFileIndex];
+	parameters_parser->routes_file_name = parameters[kRoutesFileIndex];
 }
 
 void parametersCreate(Parameters *parameters_parser,

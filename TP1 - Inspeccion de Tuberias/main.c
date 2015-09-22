@@ -11,11 +11,11 @@
 #include "Parameters.h"
 #include "File.h"
 
-#define EXECUTION_NORMAL 0
-#define EXECUTION_ERROR 1
+static int const kExecutionNormal = 0;
+static int const kExecutionError = 1;
 
-#define PARAMATERS_COUNT_ERROR "La cantidad de parámetros es inválida\n"
-#define FILES_OPEN_ERROR "Archivo inválido\n"
+static char *const kParametersError = "La cantidad de parámetros es inválida\n";
+static char *const kFilesOpenError = "Archivo inválido\n";
 
 FileOpenCode createFiles(Parameters *parameters,
 						File *measuresFile,
@@ -50,9 +50,9 @@ int main(int argc, const char *argv[]) {
 
 	parametersCreate(&parameters, argc, argv);
 	if (parametersCode(&parameters) == ParametersCodeFail) {
-		printf("%s", PARAMATERS_COUNT_ERROR);
+		printf("%s", kParametersError);
 		parametersDestroy(&parameters);
-		return EXECUTION_ERROR;
+		return kExecutionError;
 	}
 
 	FileOpenCode openCode = createFiles(&parameters,
@@ -64,13 +64,13 @@ int main(int argc, const char *argv[]) {
 		fileDestroy(&measuresFile);
 		fileDestroy(&pipesFile);
 		fileDestroy(&routesFile);
-		printf("%s", FILES_OPEN_ERROR);
-		return EXECUTION_ERROR;
+		printf("%s", kFilesOpenError);
+		return kExecutionError;
 	}
 
 	fileDestroy(&measuresFile);
 	fileDestroy(&pipesFile);
 	fileDestroy(&routesFile);
 	parametersDestroy(&parameters);
-	return EXECUTION_NORMAL;
+	return kExecutionNormal;
 }
