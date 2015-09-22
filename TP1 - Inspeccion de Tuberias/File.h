@@ -17,8 +17,8 @@ typedef enum {
 } FileOpenCode;
 
 typedef enum {
-    FileOpenModeRead,
-    FileOpenModeWrite
+    FileOpenModeReadText,
+    FileOpenModeReadBinary
 } FileOpenMode;
 
 typedef struct {

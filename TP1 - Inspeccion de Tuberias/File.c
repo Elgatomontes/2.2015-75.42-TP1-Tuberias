@@ -10,14 +10,14 @@
 
 #include "File.h"
 
-#define FILE_OPEN_MODE_READ "rb"
-#define FILE_OPEN_MODE_WRITE "w"
+static char *const kOpenModeReadText = "r";
+static char *const kOpenModeReadBinary = "rb";
 
 char *getOpenMode(FileOpenMode open_mode) {
-    if (open_mode == FileOpenModeRead) {
-        return FILE_OPEN_MODE_READ;
-    } else if (open_mode == FileOpenModeWrite) {
-        return FILE_OPEN_MODE_WRITE;
+    if (open_mode == FileOpenModeReadText) {
+        return kOpenModeReadText;
+    } else if (open_mode == FileOpenModeReadBinary) {
+        return kOpenModeReadBinary;
     }
 
     return "";
