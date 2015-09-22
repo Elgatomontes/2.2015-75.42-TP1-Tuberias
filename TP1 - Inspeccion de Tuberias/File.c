@@ -63,3 +63,7 @@ void fileRead(File *file, char *valueToRead, int bytesToRead) {
 		file->endOfFile = EOF;
 	}
 }
+
+int fileEndOfFile(File *file) {
+	return file->endOfFile;
+}

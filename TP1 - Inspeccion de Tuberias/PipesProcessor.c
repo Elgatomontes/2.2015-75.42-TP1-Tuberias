@@ -8,17 +8,30 @@
 
 #include "PipesProcessor.h"
 
-void pipesProcessorCreate(PipesProcessor *processor,
-						File *measures,
-						File *pipes,
-						File *route) {
-	processor->measuresFile = measures;
-	processor->pipesFile = pipes;
-	processor->routeFile = route;
+void createArguments(PipesProcessor *processor, File *measures) {
+	Arguments newArguments;
+	argumentsCreate(&newArguments, processor->measures);
+	processor->arguments = &newArguments;
+}
 
-	argumentsCreate(processor->arguments, processor->measuresFile);
+void pipesProcessorCreate(PipesProcessor *processor,
+		File *measuresFile,
+		File *pipesFile,
+		File *routeFile) {
+	processor->measures = measuresFile;
+	processor->pipes = pipesFile;
+	processor->routeFile = routeFile;
+
+	createArguments(processor, processor->measures);
+
+	pipesRouteCreate(&(processor->route), processor->pipes, processor->routeFile);
 }
 
 void pipesProcessorDestroy(PipesProcessor *processor) {
 	argumentsDestroy(processor->arguments);
+	pipesRouteDestroy(processor->route);
+}
+
+void pipesProcessorProcess(PipesProcessor *processor) {
+	// Read file.
 }

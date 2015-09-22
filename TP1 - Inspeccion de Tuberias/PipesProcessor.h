@@ -9,14 +9,16 @@
 #ifndef PIPESPROCESSOR_H_
 #define PIPESPROCESSOR_H_
 
+#include "PipesRoute.h"
 #include "Arguments.h"
 #include "File.h"
 
 typedef struct {
 	Arguments *arguments;
-	File *measuresFile;
-	File *pipesFile;
+	File *measures;
+	File *pipes;
 	File *routeFile;
+	PipesRoute *route;
 } PipesProcessor;
 
 void pipesProcessorCreate(PipesProcessor *processor,
@@ -25,5 +27,7 @@ void pipesProcessorCreate(PipesProcessor *processor,
 						File *route);
 
 void pipesProcessorDestroy(PipesProcessor *processor);
+
+void pipesProcessorProcess(PipesProcessor *processor);
 
 #endif /* PIPESPROCESSOR_H_ */

@@ -77,7 +77,8 @@ int main(int argc, const char *argv[]) {
 		return kExecutionError;
 	}
 
-	pipesProcessorCreate(&processor);
+	pipesProcessorCreate(&processor, &measuresFile, &pipesFile, &routesFile);
+	pipesProcessorProcess(&processor);
 
 	fileDestroy(&measuresFile);
 	fileDestroy(&pipesFile);
