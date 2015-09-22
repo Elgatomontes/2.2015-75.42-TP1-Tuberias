@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <netinet/in.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "File.h"
@@ -56,8 +58,8 @@ void fileReadLine(File *file, char *line, int maxLenght) {
     }
 }
 
-void fileRead(File *file, char *line, int bytesToRead) {
-	if (fread(line, bytesToRead, 1, file->file) == 0) {
+void fileRead(File *file, char *valueToRead, int bytesToRead) {
+	if (fread(valueToRead, bytesToRead, 1, file->file) == 0) {
 		file->endOfFile = EOF;
 	}
 }

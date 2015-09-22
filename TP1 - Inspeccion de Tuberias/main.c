@@ -9,6 +9,7 @@
 #include <stdio.h>
 
 #include "Parameters.h"
+#include "Arguments.h"
 #include "File.h"
 
 static int const kExecutionNormal = 0;
@@ -18,24 +19,33 @@ static char *const kParametersError = "La cantidad de parámetros es inválida\n
 static char *const kFilesOpenError = "Archivo inválido\n";
 
 FileOpenCode createFiles(Parameters *parameters,
-						File *measuresFile,
-						File *pipesFile,
-						File *routesFile) {
+		File *measuresFile,
+		File *pipesFile,
+		File *routesFile) {
 	fileCreate(measuresFile,
-				parameterMeasuresFileName(parameters),
-				FileOpenModeReadBinary);
+			parameterMeasuresFileName(parameters),
+			FileOpenModeReadBinary);
+
+	if (fileOpenCode(measuresFile) == FileOpenCodeFail) {
+		return FileOpenCodeFail;
+	}
 
 	fileCreate(pipesFile,
-				parameterPipesFileName(parameters),
-				FileOpenModeReadText);
+			parameterPipesFileName(parameters),
+			FileOpenModeReadText);
+
+	if (fileOpenCode(pipesFile) == FileOpenCodeFail) {
+		fileDestroy(measuresFile);
+		return FileOpenCodeFail;
+	}
 
 	fileCreate(routesFile,
-				parameterRoutesFileName(parameters),
-				FileOpenModeReadText);
+			parameterRoutesFileName(parameters),
+			FileOpenModeReadText);
 
-	if (fileOpenCode(measuresFile) == FileOpenCodeFail ||
-		fileOpenCode(pipesFile) == FileOpenCodeFail ||
-		fileOpenCode(routesFile) == FileOpenCodeFail) {
+	if (fileOpenCode(routesFile) == FileOpenCodeFail) {
+		fileDestroy(measuresFile);
+		fileDestroy(pipesFile);
 		return FileOpenCodeFail;
 	}
 
@@ -47,6 +57,7 @@ int main(int argc, const char *argv[]) {
 	File measuresFile;
 	File pipesFile;
 	File routesFile;
+	Arguments arguments;
 
 	parametersCreate(&parameters, argc, argv);
 	if (parametersCode(&parameters) == ParametersCodeFail) {
@@ -56,21 +67,21 @@ int main(int argc, const char *argv[]) {
 	}
 
 	FileOpenCode openCode = createFiles(&parameters,
-										&measuresFile,
-										&pipesFile,
-										&routesFile);
+			&measuresFile,
+			&pipesFile,
+			&routesFile);
 	if (openCode == FileOpenCodeFail) {
 		parametersDestroy(&parameters);
-		fileDestroy(&measuresFile);
-		fileDestroy(&pipesFile);
-		fileDestroy(&routesFile);
 		printf("%s", kFilesOpenError);
 		return kExecutionError;
 	}
+
+	argumentsCreate(&arguments, &measuresFile);
 
 	fileDestroy(&measuresFile);
 	fileDestroy(&pipesFile);
 	fileDestroy(&routesFile);
 	parametersDestroy(&parameters);
+	argumentsDestroy(&arguments);
 	return kExecutionNormal;
 }

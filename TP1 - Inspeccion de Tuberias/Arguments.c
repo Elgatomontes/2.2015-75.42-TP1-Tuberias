@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+#include "HexFormatHelper.h"
 #include "Arguments.h"
 
 static int const kArgumentSize = 4;
@@ -29,20 +30,20 @@ void argumentsCreate(Arguments *arguments, File *file) {
 	arguments->sensorsNumber = 0;
 	arguments->thresholdSamples = 0;
 
-	char *argumentsBuffer = (char *)malloc(kArgumentSize);
+	char *intToRead = (char *)malloc(kArgumentSize);
 
-	fileRead(file, argumentsBuffer, kArgumentSize);
-	arguments->flowSpeed = atoi(argumentsBuffer);
+	fileRead(file, intToRead, kArgumentSize);
+	arguments->flowSpeed = formatHexToInt(intToRead);
 
-	fileRead(file, argumentsBuffer, kArgumentSize);
-	arguments->sensingSpeed = atoi(argumentsBuffer);
+	fileRead(file, intToRead, kArgumentSize);
+	arguments->sensingSpeed = formatHexToInt(intToRead);
 
-	fileRead(file, argumentsBuffer, kArgumentSize);
-	arguments->sensorsNumber = atoi(argumentsBuffer);
+	fileRead(file, intToRead, kArgumentSize);
+	arguments->sensorsNumber = formatHexToInt(intToRead);
 
 	arguments->thresholdSamples = argumentsCalculateThreshold(arguments);
 
-	free(argumentsBuffer);
+	free(intToRead);
 }
 
 void argumentsDestroy(Arguments *arguments) {

@@ -35,6 +35,6 @@ FileOpenCode fileOpenCode(File *file);
 
 void fileReadLine(File *file, char *line, int maxLenght);
 
-void fileRead(File *file, char *line, int bytesToRead);
+void fileRead(File *file, char *valueToRead, int bytesToRead);
 
 #endif /* FILE_H_ */
