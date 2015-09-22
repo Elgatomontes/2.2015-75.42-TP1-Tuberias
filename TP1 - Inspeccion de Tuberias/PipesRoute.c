@@ -49,12 +49,18 @@ void createRouteList(PipesRoute *route, File *routeFiles) {
 	free(nodeNameBuffer);
 }
 
-void pipesRouteCreate(PipesRoute **route, File *routeFiles) {
+void createDistanceList(PipesRoute *route, File *pipesFile) {
+	pipesDistancesCreate(&route->distances, pipesFile);
+}
+
+void pipesRouteCreate(PipesRoute **route, File *routeFiles, File *pipesFile) {
 	PipesRoute *newRoute = (PipesRoute *)malloc(sizeof(PipesRoute));
 	newRoute->headNode = NULL;
+	newRoute->distances = NULL;
 	*route = newRoute;
 
 	createRouteList(*route, routeFiles);
+	createDistanceList(*route, pipesFile);
 }
 
 void pipesRouteDestroy(PipesRoute *route) {
@@ -69,5 +75,6 @@ void pipesRouteDestroy(PipesRoute *route) {
 		currentNode = nextNode;
 	}
 
+	pipesDistancesDestroy(route->distances);
 	free(route);
 }

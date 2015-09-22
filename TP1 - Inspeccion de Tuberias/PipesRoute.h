@@ -9,14 +9,16 @@
 #ifndef PIPESROUTE_H_
 #define PIPESROUTE_H_
 
+#include "PipesDistances.h"
 #include "RouteNode.h"
 #include "File.h"
 
 typedef struct {
 	struct RouteNode *headNode;
+	PipesDistances *distances;
 } PipesRoute;
 
-void pipesRouteCreate(PipesRoute **route, File *routeFiles);
+void pipesRouteCreate(PipesRoute **route, File *routeFiles, File *pipesFile);
 
 void pipesRouteDestroy(PipesRoute *route);
 

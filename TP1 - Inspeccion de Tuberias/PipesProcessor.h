@@ -9,7 +9,6 @@
 #ifndef PIPESPROCESSOR_H_
 #define PIPESPROCESSOR_H_
 
-#include "PipesDistances.h"
 #include "PipesRoute.h"
 #include "Arguments.h"
 #include "File.h"
@@ -20,7 +19,6 @@ typedef struct {
 	File *pipes;
 	File *routeFile;
 	PipesRoute *route;
-	PipesDistances *distances;
 } PipesProcessor;
 
 void pipesProcessorCreate(PipesProcessor *processor,
