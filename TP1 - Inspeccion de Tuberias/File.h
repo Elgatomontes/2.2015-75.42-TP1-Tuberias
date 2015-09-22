@@ -1,5 +1,5 @@
 //
-//  File.c
+//  File.h
 //  TP1 - Inspeccion de Tuberias
 //
 //  Created by Gastón Montes on 9/9/15.
