@@ -16,7 +16,7 @@ typedef struct {
 	struct RouteNode *headNode;
 } PipesRoute;
 
-void pipesRouteCreate(PipesRoute **route, File *pipesFile, File *routeFiles);
+void pipesRouteCreate(PipesRoute **route, File *routeFiles);
 
 void pipesRouteDestroy(PipesRoute *route);
 

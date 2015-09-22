@@ -10,12 +10,12 @@
 #define ROUTENODE_H_
 
 struct RouteNode {
-	char nodeName;
+	char *nodeName;
 	struct RouteNode *next;
 	int distanceToRoot;
 };
 
-struct RouteNode *routeNodeCreate(char nodeName);
+struct RouteNode *routeNodeCreate(char *nodeName);
 
 void routeNodeDestroy(struct RouteNode *node);
 

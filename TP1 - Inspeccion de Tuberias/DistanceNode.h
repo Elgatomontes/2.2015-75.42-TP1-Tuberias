@@ -10,13 +10,15 @@
 #define DISTANCENODE_H_
 
 struct DistanceNode {
-	char firstNodeName;
-	char secondNodeName;
+	char *firstNodeName;
+	char *secondNodeName;
 	int distance;
 	struct DistanceNode *next;
 };
 
-struct DistanceNode *distanceNodeCreate(char first, char second, int distance);
+struct DistanceNode *distanceNodeCreate(char *first,
+		char *second,
+		int distance);
 
 void distanceNodeDestroy(struct DistanceNode *node);
 

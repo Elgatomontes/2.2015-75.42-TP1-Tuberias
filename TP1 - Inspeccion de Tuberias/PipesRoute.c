@@ -18,6 +18,7 @@ void addNodeToRoute(PipesRoute *route, struct RouteNode *node) {
 	if (currentNode == NULL) {
 		route->headNode = node;
 		routeNodeSetDistanceToRoot(node, 0);
+		routeNodeSetNext(node, NULL);
 	} else {
 		struct RouteNode *prevNode = NULL;
 
@@ -26,9 +27,10 @@ void addNodeToRoute(PipesRoute *route, struct RouteNode *node) {
 			currentNode = routeNodeNext(currentNode);
 		}
 		routeNodeSetNext(prevNode, node);
+		routeNodeSetNext(node, NULL);
 
 		int prevDistanceToRoot = routeNodeDistanceToRoot(prevNode);
-		int distanceToPrev = 2; // Calculate distance to previous.
+		int distanceToPrev = 2; // @TODO: - Calculate distance to previous.
 		routeNodeSetDistanceToRoot(node, prevDistanceToRoot + distanceToPrev);
 	}
 }
@@ -39,7 +41,7 @@ void createRouteList(PipesRoute *route, File *routeFiles) {
 	fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 
 	while (fileEndOfFile(routeFiles) != EOF) {
-		struct RouteNode *newNode = routeNodeCreate(nodeNameBuffer[0]);
+		struct RouteNode *newNode = routeNodeCreate(nodeNameBuffer);
 		addNodeToRoute(route, newNode);
 		fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 	}
@@ -47,7 +49,7 @@ void createRouteList(PipesRoute *route, File *routeFiles) {
 	free(nodeNameBuffer);
 }
 
-void pipesRouteCreate(PipesRoute **route, File *pipesFile, File *routeFiles) {
+void pipesRouteCreate(PipesRoute **route, File *routeFiles) {
 	PipesRoute *newRoute = (PipesRoute *)malloc(sizeof(PipesRoute));
 	newRoute->headNode = NULL;
 	*route = newRoute;

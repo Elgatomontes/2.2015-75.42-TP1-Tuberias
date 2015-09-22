@@ -18,6 +18,6 @@ typedef struct {
 
 void pipesDistancesCreate(PipesDistances **distances, File *pipesFile);
 
-void pipesDistancesDestroy(PipesDistances *route);
+void pipesDistancesDestroy(PipesDistances *distances);
 
 #endif /* PIPESDISTANCES_H_ */

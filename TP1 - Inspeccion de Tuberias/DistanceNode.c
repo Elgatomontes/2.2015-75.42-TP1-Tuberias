@@ -10,12 +10,15 @@
 
 #include "DistanceNode.h"
 
-struct DistanceNode *distanceNodeCreate(char first, char second, int distance) {
+struct DistanceNode *distanceNodeCreate(char *first,
+		char *second,
+		int distance) {
 	struct DistanceNode *newNode;
 	newNode = (struct DistanceNode *)malloc(sizeof(struct DistanceNode));
 	newNode->firstNodeName = first;
 	newNode->secondNodeName = second;
 	newNode->distance = distance;
+	newNode->next = NULL;
 
 	return newNode;
 }

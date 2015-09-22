@@ -24,12 +24,14 @@ void pipesProcessorCreate(PipesProcessor *processor,
 
 	createArguments(processor, processor->measures);
 
-	pipesRouteCreate(&(processor->route), processor->pipes, processor->routeFile);
+	pipesRouteCreate(&(processor->route), processor->routeFile);
+	pipesDistancesCreate(&(processor->distances), processor->pipes);
 }
 
 void pipesProcessorDestroy(PipesProcessor *processor) {
 	argumentsDestroy(processor->arguments);
 	pipesRouteDestroy(processor->route);
+	pipesDistancesDestroy(processor->distances);
 }
 
 void pipesProcessorProcess(PipesProcessor *processor) {

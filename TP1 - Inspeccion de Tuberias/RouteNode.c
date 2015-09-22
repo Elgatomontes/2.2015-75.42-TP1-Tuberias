@@ -11,7 +11,7 @@
 
 #include "RouteNode.h"
 
-struct RouteNode * routeNodeCreate(char nodeName) {
+struct RouteNode * routeNodeCreate(char *nodeName) {
 	struct RouteNode *newNode;
 	newNode = (struct RouteNode *)malloc(sizeof(struct RouteNode));
 	newNode->nodeName  = nodeName;
