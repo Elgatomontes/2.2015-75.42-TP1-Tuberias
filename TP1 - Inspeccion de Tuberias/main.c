@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 
+#include "PipesProcessor.h"
 #include "Parameters.h"
 #include "Arguments.h"
 #include "File.h"
@@ -57,7 +58,7 @@ int main(int argc, const char *argv[]) {
 	File measuresFile;
 	File pipesFile;
 	File routesFile;
-	Arguments arguments;
+	PipesProcessor processor;
 
 	parametersCreate(&parameters, argc, argv);
 	if (parametersCode(&parameters) == ParametersCodeFail) {
@@ -76,12 +77,12 @@ int main(int argc, const char *argv[]) {
 		return kExecutionError;
 	}
 
-	argumentsCreate(&arguments, &measuresFile);
+	pipesProcessorCreate(&processor);
 
 	fileDestroy(&measuresFile);
 	fileDestroy(&pipesFile);
 	fileDestroy(&routesFile);
 	parametersDestroy(&parameters);
-	argumentsDestroy(&arguments);
+	pipesProcessorDestroy(&processor);
 	return kExecutionNormal;
 }
