@@ -9,6 +9,17 @@
 #ifndef DISTANCENODE_H_
 #define DISTANCENODE_H_
 
+struct DistanceNode {
+	char firstNodeName;
+	char secondNodeName;
+	int distance;
+	struct DistanceNode *next;
+};
 
+struct DistanceNode *distanceNodeCreate(char first, char second, int distance);
+
+void distanceNodeDestroy(struct DistanceNode *node);
+
+void distanceNodeSetNext(struct DistanceNode *node, struct DistanceNode *next);
 
 #endif /* DISTANCENODE_H_ */

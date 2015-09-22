@@ -9,6 +9,10 @@
 #ifndef PIPESDISTANCES_H_
 #define PIPESDISTANCES_H_
 
+#include "DistanceNode.h"
 
+typedef struct {
+	struct DistanceNode *headNode;
+} PipesDistances;
 
 #endif /* PIPESDISTANCES_H_ */
