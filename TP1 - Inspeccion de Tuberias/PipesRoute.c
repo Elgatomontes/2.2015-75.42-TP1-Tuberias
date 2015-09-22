@@ -10,10 +10,22 @@
 
 #include "PipesRoute.h"
 
-void pipesRouteCreate(PipesRoute *route) {
+void pipesRouteCreate(PipesRoute *route, File *pipesFile, File *routeFiles) {
+	route = (PipesRoute *)malloc(sizeof(PipesRoute));
 	route->headNode = NULL;
 }
 
 void pipesRouteDestroy(PipesRoute *route) {
+	struct RouteNode *currentNode = route->headNode;
+	struct RouteNode *nextNode;
 
+	while (currentNode != NULL) {
+		nextNode = currentNode->next;
+
+		routeNodeDestroy(currentNode);
+
+		currentNode = nextNode;
+	}
+
+	free(route);
 }

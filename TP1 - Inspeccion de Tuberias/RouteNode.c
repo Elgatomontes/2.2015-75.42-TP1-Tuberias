@@ -10,16 +10,20 @@
 
 #include "RouteNode.h"
 
-void routeNodeCreate(RouteNode *node, char nodeName) {
+void routeNodeCreate(struct RouteNode *node, char nodeName) {
 	node = (struct RouteNode *)malloc(sizeof(struct RouteNode));
 	node->nodeName = nodeName;
 	node->next = NULL;
 	node->distanceToNextNode = -1;
 }
 
-void routeNodeDestroy(RouteNode *node) {
-	node->nodeName = NULL;
+void routeNodeDestroy(struct RouteNode *node) {
+	node->nodeName = '0';
 	node->next = NULL;
 	node->distanceToNextNode = -1;
 	free(node);
+}
+
+struct RouteNode *routeNodeNext(struct RouteNode *node) {
+	return node->next;
 }

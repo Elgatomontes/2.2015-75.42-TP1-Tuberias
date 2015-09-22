@@ -10,12 +10,13 @@
 #define PIPESROUTE_H_
 
 #include "RouteNode.h"
+#include "File.h"
 
 typedef struct {
 	struct RouteNode *headNode;
 } PipesRoute;
 
-void pipesRouteCreate(PipesRoute *route);
+void pipesRouteCreate(PipesRoute *route, File *pipesFile, File *routeFiles);
 
 void pipesRouteDestroy(PipesRoute *route);
 

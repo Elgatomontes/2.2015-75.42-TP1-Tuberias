@@ -9,14 +9,16 @@
 #ifndef ROUTENODE_H_
 #define ROUTENODE_H_
 
-typedef struct {
+struct RouteNode {
 	char nodeName;
 	struct RouteNode *next;
 	int distanceToNextNode;
-} RouteNode;
+};
 
-void routeNodeCreate(RouteNode *node, char nodeName);
+void routeNodeCreate(struct RouteNode *node, char nodeName);
 
-void routeNodeDestroy(RouteNode *node);
+void routeNodeDestroy(struct RouteNode *node);
+
+struct RouteNode *routeNodeNext(struct RouteNode *node);
 
 #endif /* ROUTENODE_H_ */
