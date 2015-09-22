@@ -6,4 +6,20 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <stdlib.h>
 
+#include "RouteNode.h"
+
+void routeNodeCreate(RouteNode *node, char nodeName) {
+	node = (struct RouteNode *)malloc(sizeof(struct RouteNode));
+	node->nodeName = nodeName;
+	node->next = NULL;
+	node->distanceToNextNode = -1;
+}
+
+void routeNodeDestroy(RouteNode *node) {
+	node->nodeName = NULL;
+	node->next = NULL;
+	node->distanceToNextNode = -1;
+	free(node);
+}

@@ -6,3 +6,14 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <stdlib.h>
+
+#include "PipesRoute.h"
+
+void pipesRouteCreate(PipesRoute *route) {
+	route->headNode = NULL;
+}
+
+void pipesRouteDestroy(PipesRoute *route) {
+
+}

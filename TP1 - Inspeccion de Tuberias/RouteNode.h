@@ -15,4 +15,8 @@ typedef struct {
 	int distanceToNextNode;
 } RouteNode;
 
+void routeNodeCreate(RouteNode *node, char nodeName);
+
+void routeNodeDestroy(RouteNode *node);
+
 #endif /* ROUTENODE_H_ */

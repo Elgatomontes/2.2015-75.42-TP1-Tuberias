@@ -15,4 +15,8 @@ typedef struct {
 	struct RouteNode *headNode;
 } PipesRoute;
 
+void pipesRouteCreate(PipesRoute *route);
+
+void pipesRouteDestroy(PipesRoute *route);
+
 #endif /* PIPESROUTE_H_ */
