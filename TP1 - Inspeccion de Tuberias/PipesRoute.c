@@ -10,7 +10,7 @@
 
 #include "PipesRoute.h"
 
-static int const kNodeNameMaxLenght = 454; // name + \n char.
+static int const kNodeNameMaxLenght = 3; // name + \n char.
 
 void createList(PipesRoute *route, File *pipesFile, File *routeFiles) {
 	char *nodeNameBuffer = (char *)malloc(sizeof(char) * kNodeNameMaxLenght);
@@ -18,7 +18,8 @@ void createList(PipesRoute *route, File *pipesFile, File *routeFiles) {
 	fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 
 	while (fileEndOfFile(routeFiles) != EOF) {
-		printf("Nodo leído: %s", nodeNameBuffer);
+		struct RouteNode *newNode = routeNodeCreate(nodeNameBuffer[0]);
+		pipesRouteAddNode(route, newNode);
 		fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 	}
 
@@ -38,15 +39,11 @@ void pipesRouteDestroy(PipesRoute *route) {
 	struct RouteNode *nextNode = NULL;
 
 	while (currentNode != NULL) {
-		printf("Llegué hasta aca\n");
 		nextNode = routeNodeNext(currentNode);
-		printf("Llegué hasta aca 1\n");
 
 		routeNodeDestroy(currentNode);
-		printf("Llegué hasta aca 2\n");
 
 		currentNode = nextNode;
-		printf("Llegué hasta aca 3\n");
 	}
 
 	free(route);
@@ -56,8 +53,10 @@ void pipesRouteAddNode(PipesRoute *route, struct RouteNode *node) {
 	struct RouteNode *currentNode = route->headNode;
 
 	if (currentNode == NULL) {
+		printf("Adding head node: %c\n", node->nodeName);
 		route->headNode = node;
 	} else {
+		printf("Adding node: %c\n", node->nodeName);
 		struct RouteNode *prevNode = NULL;
 
 		while (currentNode != NULL) {

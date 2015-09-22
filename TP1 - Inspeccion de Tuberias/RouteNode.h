@@ -15,7 +15,7 @@ struct RouteNode {
 	int distanceToNextNode;
 };
 
-void routeNodeCreate(struct RouteNode *node, char nodeName);
+struct RouteNode * routeNodeCreate(char nodeName);
 
 void routeNodeDestroy(struct RouteNode *node);
 

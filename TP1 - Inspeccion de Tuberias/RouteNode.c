@@ -7,20 +7,21 @@
 //
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "RouteNode.h"
 
-void routeNodeCreate(struct RouteNode *node, char nodeName) {
-	node = (struct RouteNode *)malloc(sizeof(struct RouteNode));
-	node->nodeName = nodeName;
-	node->next = NULL;
-	node->distanceToNextNode = -1;
+struct RouteNode * routeNodeCreate(char nodeName) {
+	struct RouteNode *newNode;
+	newNode = (struct RouteNode *)malloc(sizeof(struct RouteNode));
+	newNode->nodeName  = nodeName;
+	newNode->next      = NULL;
+	newNode->distanceToNextNode = -1;
+
+	return newNode;
 }
 
 void routeNodeDestroy(struct RouteNode *node) {
-	node->nodeName = '0';
-	node->next = NULL;
-	node->distanceToNextNode = -1;
 	free(node);
 }
 
