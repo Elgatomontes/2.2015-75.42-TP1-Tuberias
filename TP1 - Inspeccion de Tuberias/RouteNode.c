@@ -16,7 +16,7 @@ struct RouteNode * routeNodeCreate(char nodeName) {
 	newNode = (struct RouteNode *)malloc(sizeof(struct RouteNode));
 	newNode->nodeName  = nodeName;
 	newNode->next      = NULL;
-	newNode->distanceToNextNode = -1;
+	newNode->distanceToRoot = -1;
 
 	return newNode;
 }
@@ -31,4 +31,12 @@ struct RouteNode *routeNodeNext(struct RouteNode *node) {
 
 void routeNodeSetNext(struct RouteNode *node, struct RouteNode *next) {
 	node->next = next;
+}
+
+int routeNodeDistanceToRoot(struct RouteNode *node) {
+	return node->distanceToRoot;
+}
+
+void routeNodeSetDistanceToRoot(struct RouteNode *node, int distance) {
+	node->distanceToRoot = distance;
 }

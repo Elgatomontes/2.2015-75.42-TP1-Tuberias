@@ -55,14 +55,22 @@ void pipesRouteAddNode(PipesRoute *route, struct RouteNode *node) {
 	if (currentNode == NULL) {
 		printf("Adding head node: %c\n", node->nodeName);
 		route->headNode = node;
+		routeNodeSetDistanceToRoot(node, 0);
 	} else {
-		printf("Adding node: %c\n", node->nodeName);
 		struct RouteNode *prevNode = NULL;
 
 		while (currentNode != NULL) {
 			prevNode = currentNode;
 			currentNode = routeNodeNext(currentNode);
 		}
-		routeNodeSetNext(prevNode,node);
+		routeNodeSetNext(prevNode, node);
+
+		int prevDistanceToRoot = routeNodeDistanceToRoot(prevNode);
+		int distanceToPrev = 2; // Calculate distance to previous.
+		routeNodeSetDistanceToRoot(node, prevDistanceToRoot + distanceToPrev);
+
+		printf("Adding node: %c.\n", node->nodeName);
+		printf("Previous node: %c.\n", prevNode->nodeName);
+		printf("Distance to root: %i.\n", node->distanceToRoot);
 	}
 }
