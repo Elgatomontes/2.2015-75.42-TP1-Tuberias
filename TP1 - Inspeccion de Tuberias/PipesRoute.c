@@ -20,7 +20,7 @@ void pipesRouteDestroy(PipesRoute *route) {
 	struct RouteNode *nextNode;
 
 	while (currentNode != NULL) {
-		nextNode = currentNode->next;
+		nextNode = routeNodeNext(currentNode);
 
 		routeNodeDestroy(currentNode);
 
@@ -28,4 +28,20 @@ void pipesRouteDestroy(PipesRoute *route) {
 	}
 
 	free(route);
+}
+
+void pipesRouteAddNode(PipesRoute *route, struct RouteNode *node) {
+	struct RouteNode *currentNode = route->headNode;
+
+	if (currentNode == NULL) {
+		route->headNode = node;
+	} else {
+		struct RouteNode *prevNode = NULL;
+
+		while (currentNode != NULL) {
+			prevNode = currentNode;
+			currentNode = routeNodeNext(currentNode);
+		}
+		routeNodeSetNext(prevNode,node);
+	}
 }

@@ -21,4 +21,6 @@ void routeNodeDestroy(struct RouteNode *node);
 
 struct RouteNode *routeNodeNext(struct RouteNode *node);
 
+void routeNodeSetNext(struct RouteNode *node, struct RouteNode *next);
+
 #endif /* ROUTENODE_H_ */

@@ -27,3 +27,7 @@ void routeNodeDestroy(struct RouteNode *node) {
 struct RouteNode *routeNodeNext(struct RouteNode *node) {
 	return node->next;
 }
+
+void routeNodeSetNext(struct RouteNode *node, struct RouteNode *next) {
+	node->next = next;
+}
