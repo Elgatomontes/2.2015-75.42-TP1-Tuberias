@@ -9,9 +9,10 @@
 #ifndef PIPESROUTE_H_
 #define PIPESROUTE_H_
 
+#include "RouteNode.h"
+
 typedef struct {
-
-
+	struct RouteNode *headNode;
 } PipesRoute;
 
 #endif /* PIPESROUTE_H_ */
