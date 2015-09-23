@@ -40,3 +40,7 @@ int routeNodeDistanceToRoot(struct RouteNode *node) {
 void routeNodeSetDistanceToRoot(struct RouteNode *node, int distance) {
 	node->distanceToRoot = distance;
 }
+
+char *routeNodeName(struct RouteNode *node) {
+	return node->nodeName;
+}

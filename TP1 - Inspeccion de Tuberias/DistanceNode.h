@@ -25,4 +25,10 @@ void distanceNodeDestroy(struct DistanceNode *node);
 void distanceNodeSetNext(struct DistanceNode *node, struct DistanceNode *next);
 struct DistanceNode *distanceNodeNext(struct DistanceNode *node);
 
+char *distanceNodeFirstNodeName(struct DistanceNode *node);
+
+char *distanceNodeSecondNodeName(struct DistanceNode *node);
+
+int distanceNodeDistance(struct DistanceNode *node);
+
 #endif /* DISTANCENODE_H_ */

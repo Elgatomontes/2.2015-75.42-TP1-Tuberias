@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -18,10 +19,6 @@ void addNewNode(PipesDistances *distances, struct DistanceNode *node) {
 	struct DistanceNode *currentNode = distances->headNode;
 
 	if (currentNode == NULL) {
-		printf("Adding head node: %s -> %s distance: %i\n",
-				node->firstNodeName,
-				node->secondNodeName,
-				node->distance);
 		distances->headNode = node;
 		distanceNodeSetNext(node, NULL);
 	} else {
@@ -33,24 +30,20 @@ void addNewNode(PipesDistances *distances, struct DistanceNode *node) {
 		}
 		distanceNodeSetNext(prevNode, node);
 		distanceNodeSetNext(node, NULL);
-
-		printf("Adding node: %s -> %s distance: %i\n",
-				node->firstNodeName,
-				node->secondNodeName,
-				node->distance);
 	}
 }
 
 void createDistancesList(PipesDistances *distances, File *pipesFile) {
 	char *lineBuffer = (char *)malloc(sizeof(char) * kLineMaxLenght);
-	char *firstName = (char *)malloc(sizeof(char) * kNameMaxLenght);
-	char *secondName = (char *)malloc(sizeof(char) * kNameMaxLenght);
 
 	fileReadLine(pipesFile, lineBuffer, kLineMaxLenght);
 
 	while (fileEndOfFile(pipesFile) != EOF) {
 		int distance = 0;
-		sscanf(lineBuffer, "%20[^,],%i,%s", firstName, &distance, secondName);
+		char firstName[kNameMaxLenght];
+		char secondName[kNameMaxLenght];
+
+		sscanf(lineBuffer, "%20[^,],%d,%s", firstName, &distance, secondName);
 
 		struct DistanceNode *newNode;
 		newNode = distanceNodeCreate(firstName, secondName, distance);
@@ -59,8 +52,21 @@ void createDistancesList(PipesDistances *distances, File *pipesFile) {
 	}
 
 	free(lineBuffer);
-	free(firstName);
-	free(secondName);
+}
+
+void printDistancesList(PipesDistances *distances) {
+	printf("IMPRIMIENDO LA LISTA DE DISTANCIAS\n");
+	struct DistanceNode *currentNode = distances->headNode;
+	struct DistanceNode *prevNode = NULL;
+
+	while (currentNode != NULL) {
+		printf("Nodo: %s -> %s, Distancia: %i\n",
+				distanceNodeFirstNodeName(currentNode),
+				distanceNodeSecondNodeName(currentNode),
+				distanceNodeDistance(currentNode));
+		prevNode = currentNode;
+		currentNode = distanceNodeNext(prevNode);
+	}
 }
 
 void pipesDistancesCreate(PipesDistances **distances, File *pipesFile) {
@@ -70,6 +76,7 @@ void pipesDistancesCreate(PipesDistances **distances, File *pipesFile) {
 	*distances = newDistances;
 
 	createDistancesList(*distances, pipesFile);
+	printDistancesList(*distances);
 }
 
 void pipesDistancesDestroy(PipesDistances *distances) {
@@ -85,4 +92,25 @@ void pipesDistancesDestroy(PipesDistances *distances) {
 	}
 
 	free(distances);
+}
+
+int pipesDistancesBetween(PipesDistances *distances, char *first, char *second){
+	struct DistanceNode *currentNode = distances->headNode;
+	struct DistanceNode *nextNode = NULL;
+
+	char *currentNodeFirstName = distanceNodeFirstNodeName(currentNode);
+	char *currentNodeSecondName = distanceNodeSecondNodeName(currentNode);
+
+	while (currentNode != NULL) {
+		nextNode = distanceNodeNext(currentNode);
+
+		if (strcmp(first, currentNodeFirstName) == 0
+				&& strcmp(second, currentNodeSecondName) == 0) {
+			return distanceNodeDistance(currentNode);
+		}
+
+		currentNode = nextNode;
+	}
+
+	return -1;
 }

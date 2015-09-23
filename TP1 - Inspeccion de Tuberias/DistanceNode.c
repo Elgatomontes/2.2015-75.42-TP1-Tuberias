@@ -6,7 +6,9 @@
 //  Copyright (c) 2015 Gastón Montes. All rights reserved.
 //
 
+#include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "DistanceNode.h"
 
@@ -15,15 +17,19 @@ struct DistanceNode *distanceNodeCreate(char *first,
 		int distance) {
 	struct DistanceNode *newNode;
 	newNode = (struct DistanceNode *)malloc(sizeof(struct DistanceNode));
-	newNode->firstNodeName = first;
-	newNode->secondNodeName = second;
+	newNode->firstNodeName = (char *)malloc(sizeof(first));
+	newNode->secondNodeName = (char *)malloc(sizeof(second));
+
+	snprintf(newNode->firstNodeName, sizeof(first), "%s",first);
+	snprintf(newNode->secondNodeName, sizeof(second), "%s",second);
 	newNode->distance = distance;
 	newNode->next = NULL;
-
 	return newNode;
 }
 
 void distanceNodeDestroy(struct DistanceNode *node) {
+	free(node->firstNodeName);
+	free(node->secondNodeName);
 	free(node);
 }
 
@@ -33,4 +39,16 @@ void distanceNodeSetNext(struct DistanceNode *node, struct DistanceNode *next) {
 
 struct DistanceNode *distanceNodeNext(struct DistanceNode *node) {
 	return node->next;
+}
+
+char *distanceNodeFirstNodeName(struct DistanceNode *node) {
+	return node->firstNodeName;
+}
+
+char *distanceNodeSecondNodeName(struct DistanceNode *node) {
+	return node->secondNodeName;
+}
+
+int distanceNodeDistance(struct DistanceNode *node) {
+	return node->distance;
 }

@@ -26,4 +26,6 @@ void routeNodeSetNext(struct RouteNode *node, struct RouteNode *next);
 int routeNodeDistanceToRoot(struct RouteNode *node);
 void routeNodeSetDistanceToRoot(struct RouteNode *node, int distance);
 
+char *routeNodeName(struct RouteNode *node);
+
 #endif /* ROUTENODE_H_ */

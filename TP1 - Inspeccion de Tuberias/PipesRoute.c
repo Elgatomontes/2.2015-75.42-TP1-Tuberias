@@ -19,7 +19,13 @@ void addNodeToRoute(PipesRoute *route, struct RouteNode *node) {
 		route->headNode = node;
 		routeNodeSetDistanceToRoot(node, 0);
 		routeNodeSetNext(node, NULL);
+
+		printf("Agregando nodo head: %s distanceToRoot: %i\n",
+				routeNodeName(node),
+				routeNodeDistanceToRoot(node));
 	} else {
+		printf("Nodo root: %s", routeNodeName(currentNode));
+		printf("Agregando nodo: %s", routeNodeName(node));
 		struct RouteNode *prevNode = NULL;
 
 		while (currentNode != NULL) {
@@ -30,8 +36,21 @@ void addNodeToRoute(PipesRoute *route, struct RouteNode *node) {
 		routeNodeSetNext(node, NULL);
 
 		int prevDistanceToRoot = routeNodeDistanceToRoot(prevNode);
-		int distanceToPrev = 2; // @TODO: - Calculate distance to previous.
+		int distanceToPrev = pipesDistancesBetween(route->distances,
+				routeNodeName(prevNode),
+				routeNodeName(node));
 		routeNodeSetDistanceToRoot(node, prevDistanceToRoot + distanceToPrev);
+	}
+}
+
+void printList(PipesRoute *route) {
+	struct RouteNode *currentNode = route->headNode;
+	struct RouteNode *prevNode = NULL;
+
+	while (currentNode != NULL) {
+		printf("Nodo: %s", routeNodeName(currentNode));
+		prevNode = currentNode;
+		currentNode = routeNodeNext(prevNode);
 	}
 }
 
@@ -46,6 +65,8 @@ void createRouteList(PipesRoute *route, File *routeFiles) {
 		fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 	}
 
+	printList(route);
+
 	free(nodeNameBuffer);
 }
 
@@ -59,8 +80,8 @@ void pipesRouteCreate(PipesRoute **route, File *routeFiles, File *pipesFile) {
 	newRoute->distances = NULL;
 	*route = newRoute;
 
-	createRouteList(*route, routeFiles);
 	createDistanceList(*route, pipesFile);
+//	createRouteList(*route, routeFiles);
 }
 
 void pipesRouteDestroy(PipesRoute *route) {

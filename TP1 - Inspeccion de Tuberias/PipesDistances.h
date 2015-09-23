@@ -20,4 +20,6 @@ void pipesDistancesCreate(PipesDistances **distances, File *pipesFile);
 
 void pipesDistancesDestroy(PipesDistances *distances);
 
+int pipesDistancesBetween(PipesDistances *distances, char *first, char *second);
+
 #endif /* PIPESDISTANCES_H_ */
