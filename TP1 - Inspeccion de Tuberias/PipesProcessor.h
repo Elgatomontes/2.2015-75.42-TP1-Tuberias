@@ -18,7 +18,7 @@ typedef struct {
 	Arguments *arguments;
 	File *measures;
 	PipesRoute *route;
-	SensorMeasures *sensors;
+	SensorMeasures **sensors;
 } PipesProcessor;
 
 void pipesProcessorCreate(PipesProcessor *processor,

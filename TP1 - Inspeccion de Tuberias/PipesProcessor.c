@@ -29,11 +29,14 @@ void createSensors(PipesProcessor *processor) {
 	int estimateMeasures = estimateMeasuresCount(processor);
 	int sensorsCount = argumentsSensorsNumber(processor->arguments);
 
-	SensorMeasures *sensors;
-	sensors = (SensorMeasures *)malloc(sizeof(SensorMeasures) * sensorsCount);
+	SensorMeasures **sensors;
+	sensors = (SensorMeasures **)malloc(sizeof(SensorMeasures*) * sensorsCount);
 
 	for (int i = 0; i < sensorsCount; ++i) {
-		sensorMeasuresCreate(&sensors[i], processor->arguments, estimateMeasures);
+		SensorMeasures *newSensor;
+		newSensor = (SensorMeasures *)malloc(sizeof(SensorMeasures));
+		sensorMeasuresCreate(newSensor, processor->arguments, estimateMeasures);
+		sensors[i] = newSensor;
 	}
 
 	processor->sensors = sensors;
@@ -51,15 +54,16 @@ void pipesProcessorCreate(PipesProcessor *processor,
 }
 
 void pipesProcessorDestroy(PipesProcessor *processor) {
-	argumentsDestroy(processor->arguments);
-	pipesRouteDestroy(processor->route);
-
 	int sensorsCount = argumentsSensorsNumber(processor->arguments);
 	for (int i = 0; i < sensorsCount; ++i) {
-		sensorMeasuresDestroy(&processor->sensors[i]);
+		sensorMeasuresDestroy(processor->sensors[i]);
+		free(processor->sensors[i]);
 	}
 	free(processor->sensors);
 
+	pipesRouteDestroy(processor->route);
+
+	argumentsDestroy(processor->arguments);
 	free(processor->arguments);
 }
 
@@ -68,8 +72,8 @@ void pipesProcessorProcess(PipesProcessor *processor) {
 
 	while (fileEndOfFile(processor->measures) != EOF) {
 		for (int i = 0; i < sensorsCount; ++ i) {
-			SensorMeasures sensor = processor->sensors[i];
-			sensorMeasuresReadMeasure(&sensor, processor->measures);
+			SensorMeasures *sensor = processor->sensors[i];
+			sensorMeasuresReadMeasure(sensor, processor->measures);
 		}
 	}
 }

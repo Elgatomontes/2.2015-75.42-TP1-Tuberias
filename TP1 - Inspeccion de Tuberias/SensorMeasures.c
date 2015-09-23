@@ -8,9 +8,13 @@
 
 #include <stdlib.h>
 
+#include "HexFormatHelper.h"
 #include "SensorMeasures.h"
 
 static int const kMeasureSize = 2;
+
+void processValue(int measureValue) {
+}
 
 void sensorMeasuresCreate(SensorMeasures *sensor,
 		Arguments *arguments,
@@ -20,11 +24,21 @@ void sensorMeasuresCreate(SensorMeasures *sensor,
 	sensor->corrosionMeasuresCount = 0;
 	sensor->firstCorrosionMeasure = 0;
 	sensor->measuresRead = 0;
+	printf("Se creó un SensorMeasures\n");
 }
 
 void sensorMeasuresDestroy(SensorMeasures *sensor) {
 }
 
 void sensorMeasuresReadMeasure(SensorMeasures *sensor, File *file) {
-//	char *intToRead = (char *)malloc(kMeasureSize);
+	char *bytesToRead = (char *)malloc(kMeasureSize);
+	fileRead(file, bytesToRead, kMeasureSize);
+
+	if (fileEndOfFile(file) != EOF) {
+		sensor->measuresRead++;
+		printf("Mediciones leídas: %d\n", sensor->measuresRead);
+		//		int measureValue = formatHexToInt(bytesToRead);
+	}
+
+	free(bytesToRead);
 }
