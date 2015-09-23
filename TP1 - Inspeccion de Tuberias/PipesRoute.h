@@ -22,4 +22,6 @@ void pipesRouteCreate(PipesRoute **route, File *routeFiles, File *pipesFile);
 
 void pipesRouteDestroy(PipesRoute *route);
 
+int pipesRouteLenght(PipesRoute *route);
+
 #endif /* PIPESROUTE_H_ */

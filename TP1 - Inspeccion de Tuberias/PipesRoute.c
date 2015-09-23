@@ -102,3 +102,14 @@ void pipesRouteDestroy(PipesRoute *route) {
 	pipesDistancesDestroy(route->distances);
 	free(route);
 }
+
+int pipesRouteLenght(PipesRoute *route) {
+	struct RouteNode *currentNode = route->headNode;
+	struct RouteNode *prevNode = NULL;
+
+	while (currentNode != NULL) {
+		prevNode = currentNode;
+		currentNode = routeNodeNext(prevNode);
+	}
+	return routeNodeDistanceToRoot(prevNode);
+}
