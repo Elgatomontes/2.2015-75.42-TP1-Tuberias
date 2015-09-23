@@ -37,6 +37,8 @@ void fileReadLine(File *file, char *line, int maxLenght);
 
 void fileRead(File *file, char *valueToRead, int bytesToRead);
 
+void fileReadShortInt(File *file, short int valueToRead);
+
 int fileEndOfFile(File *file);
 
 #endif /* FILE_H_ */

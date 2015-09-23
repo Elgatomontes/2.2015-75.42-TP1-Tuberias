@@ -9,6 +9,7 @@
 #ifndef HEXFORMATHELPER_H_
 #define HEXFORMATHELPER_H_
 
-int formatHexToInt(char *hexNumber);
+unsigned long int formatHexToInt2Bytes(char *hexNumber);
+unsigned long int formatHexToInt4Bytes(char *hexNumber);
 
 #endif /* HEXFORMATHELPER_H_ */

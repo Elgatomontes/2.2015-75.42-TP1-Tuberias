@@ -31,13 +31,17 @@ void sensorMeasuresDestroy(SensorMeasures *sensor) {
 }
 
 void sensorMeasuresReadMeasure(SensorMeasures *sensor, File *file) {
-	char *bytesToRead = (char *)malloc(kMeasureSize);
-	fileRead(file, bytesToRead, kMeasureSize);
+	short int *bytesToRead = (short int *)malloc(sizeof(kMeasureSize));
+//	fileRead(file, bytesToRead, kMeasureSize);
+	fileReadShortInt(file, *bytesToRead);
 
 	if (fileEndOfFile(file) != EOF) {
 		sensor->measuresRead++;
-		printf("Mediciones leídas: %d\n", sensor->measuresRead);
-		//		int measureValue = formatHexToInt(bytesToRead);
+//		unsigned long int measureValue = formatHexToInt2Bytes(bytesToRead);
+//		printf("Valor de la medición %d: %li\n",
+//		sensor->measuresRead, measureValue);
+		printf("Lo que se leyó en seco %d: %i\n",
+				sensor->measuresRead, *bytesToRead);
 	}
 
 	free(bytesToRead);

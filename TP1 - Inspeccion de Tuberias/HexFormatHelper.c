@@ -11,7 +11,14 @@
 
 #include "HexFormatHelper.h"
 
-int formatHexToInt(char *hexNumber) {
+unsigned long int formatHexToInt2Bytes(char *hexNumber) {
+	unsigned long int firstHex = hexNumber[0] * pow(2, 8);
+	unsigned long int secondHex = hexNumber[1] * pow(2, 0);
+
+	return firstHex + secondHex;
+}
+
+unsigned long int formatHexToInt4Bytes(char *hexNumber) {
 	int firstHex = hexNumber[0] * pow(2, 24);
 	int secondHex = hexNumber[1] * pow(2, 16);
 	int thirdHex = hexNumber[2] * pow(2, 8);

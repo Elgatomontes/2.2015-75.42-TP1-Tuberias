@@ -33,13 +33,13 @@ void argumentsCreate(Arguments *arguments, File *file) {
 	char *intToRead = (char *)malloc(kArgumentSize);
 
 	fileRead(file, intToRead, kArgumentSize);
-	arguments->flowSpeed = formatHexToInt(intToRead);
+	arguments->flowSpeed = formatHexToInt4Bytes(intToRead);
 
 	fileRead(file, intToRead, kArgumentSize);
-	arguments->sensingSpeed = formatHexToInt(intToRead);
+	arguments->sensingSpeed = formatHexToInt4Bytes(intToRead);
 
 	fileRead(file, intToRead, kArgumentSize);
-	arguments->sensorsNumber = formatHexToInt(intToRead);
+	arguments->sensorsNumber = formatHexToInt4Bytes(intToRead);
 
 	arguments->thresholdSamples = argumentsCalculateThreshold(arguments);
 
