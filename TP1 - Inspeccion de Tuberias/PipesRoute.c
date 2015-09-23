@@ -7,6 +7,7 @@
 //
 
 #include <stdlib.h>
+#include <string.h>
 
 #include "PipesRoute.h"
 
@@ -19,19 +20,14 @@ void addNodeToRoute(PipesRoute *route, struct RouteNode *node) {
 		route->headNode = node;
 		routeNodeSetDistanceToRoot(node, 0);
 		routeNodeSetNext(node, NULL);
-
-		printf("Agregando nodo head: %s distanceToRoot: %i\n",
-				routeNodeName(node),
-				routeNodeDistanceToRoot(node));
 	} else {
-		printf("Nodo root: %s", routeNodeName(currentNode));
-		printf("Agregando nodo: %s", routeNodeName(node));
 		struct RouteNode *prevNode = NULL;
 
 		while (currentNode != NULL) {
 			prevNode = currentNode;
 			currentNode = routeNodeNext(currentNode);
 		}
+
 		routeNodeSetNext(prevNode, node);
 		routeNodeSetNext(node, NULL);
 
@@ -39,16 +35,21 @@ void addNodeToRoute(PipesRoute *route, struct RouteNode *node) {
 		int distanceToPrev = pipesDistancesBetween(route->distances,
 				routeNodeName(prevNode),
 				routeNodeName(node));
+
 		routeNodeSetDistanceToRoot(node, prevDistanceToRoot + distanceToPrev);
 	}
 }
 
-void printList(PipesRoute *route) {
+void printRouteList(PipesRoute *route) {
+	printf("IMPRIMIENDO LISTA DE RECORRIDO\n");
 	struct RouteNode *currentNode = route->headNode;
 	struct RouteNode *prevNode = NULL;
 
 	while (currentNode != NULL) {
-		printf("Nodo: %s", routeNodeName(currentNode));
+		printf("Nodo: %s a %dm del nodo root %s\n",
+				routeNodeName(currentNode),
+				routeNodeDistanceToRoot(currentNode),
+				route->headNode->nodeName);
 		prevNode = currentNode;
 		currentNode = routeNodeNext(prevNode);
 	}
@@ -60,12 +61,13 @@ void createRouteList(PipesRoute *route, File *routeFiles) {
 	fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 
 	while (fileEndOfFile(routeFiles) != EOF) {
+		// Delete the \n character.
+		nodeNameBuffer[strcspn(nodeNameBuffer, "\n")] = 0;
+
 		struct RouteNode *newNode = routeNodeCreate(nodeNameBuffer);
 		addNodeToRoute(route, newNode);
 		fileReadLine(routeFiles, nodeNameBuffer, kNodeNameMaxLenght);
 	}
-
-	printList(route);
 
 	free(nodeNameBuffer);
 }
@@ -81,7 +83,8 @@ void pipesRouteCreate(PipesRoute **route, File *routeFiles, File *pipesFile) {
 	*route = newRoute;
 
 	createDistanceList(*route, pipesFile);
-//	createRouteList(*route, routeFiles);
+	createRouteList(*route, routeFiles);
+	printRouteList(*route);
 }
 
 void pipesRouteDestroy(PipesRoute *route) {

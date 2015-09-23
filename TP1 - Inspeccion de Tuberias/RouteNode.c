@@ -14,14 +14,17 @@
 struct RouteNode * routeNodeCreate(char *nodeName) {
 	struct RouteNode *newNode;
 	newNode = (struct RouteNode *)malloc(sizeof(struct RouteNode));
-	newNode->nodeName  = nodeName;
 	newNode->next      = NULL;
 	newNode->distanceToRoot = -1;
+
+	newNode->nodeName  = (char *)malloc(sizeof(nodeName));
+	snprintf(newNode->nodeName, sizeof(nodeName), "%s",nodeName);
 
 	return newNode;
 }
 
 void routeNodeDestroy(struct RouteNode *node) {
+	free(node->nodeName);
 	free(node);
 }
 

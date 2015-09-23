@@ -98,14 +98,16 @@ int pipesDistancesBetween(PipesDistances *distances, char *first, char *second){
 	struct DistanceNode *currentNode = distances->headNode;
 	struct DistanceNode *nextNode = NULL;
 
-	char *currentNodeFirstName = distanceNodeFirstNodeName(currentNode);
-	char *currentNodeSecondName = distanceNodeSecondNodeName(currentNode);
-
 	while (currentNode != NULL) {
 		nextNode = distanceNodeNext(currentNode);
 
-		if (strcmp(first, currentNodeFirstName) == 0
-				&& strcmp(second, currentNodeSecondName) == 0) {
+		char *currentNodeFirstName = distanceNodeFirstNodeName(currentNode);
+		char *currentNodeSecondName = distanceNodeSecondNodeName(currentNode);
+
+		if ((strcmp(first, currentNodeFirstName) == 0 &&
+				strcmp(second, currentNodeSecondName) == 0) ||
+				(strcmp(second, currentNodeFirstName) == 0 &&
+						strcmp(first, currentNodeSecondName))) {
 			return distanceNodeDistance(currentNode);
 		}
 
