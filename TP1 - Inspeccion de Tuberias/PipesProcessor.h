@@ -9,6 +9,7 @@
 #ifndef PIPESPROCESSOR_H_
 #define PIPESPROCESSOR_H_
 
+#include "SensorMeasures.h"
 #include "PipesRoute.h"
 #include "Arguments.h"
 #include "File.h"
@@ -16,9 +17,8 @@
 typedef struct {
 	Arguments *arguments;
 	File *measures;
-	File *pipes;
-	File *routeFile;
 	PipesRoute *route;
+	SensorMeasures *sensors;
 } PipesProcessor;
 
 void pipesProcessorCreate(PipesProcessor *processor,
